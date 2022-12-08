@@ -6,10 +6,6 @@ require('dotenv').config();
 const bot=new Telegraf(process.env.TEL_KEY);
 
 
-
-
-
-
 var options = {
   url:'https://indian-news-live.p.rapidapi.com/news/cricket',
   method: 'GET',
