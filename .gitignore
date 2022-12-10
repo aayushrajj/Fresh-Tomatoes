@@ -1,2 +1,5 @@
 bot-server/mybot.js
 .env
+/bot-server/node_modules
+/bot-server/package-lock.json
+/bot-server/package.json
