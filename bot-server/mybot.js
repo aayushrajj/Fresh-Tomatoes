@@ -7,7 +7,7 @@ const bot=new Telegraf(process.env.TEL_KEY);
 
 
 var options = {
-  url:'http://www.omdbapi.com/?apikey=[process.env.API_KEY]&',
+  url:'http://www.omdbapi.com/?apikey=[ec64f18c]&',
   method: 'GET',
   headers: {
     'x-rapidapi-host': 'indian-news-live.p.rapidapi.com',
@@ -37,7 +37,7 @@ bot.command("movie", async (ctx) => {
     
     try {
       ctx.reply(`${Date()}`);
-      ctx.reply("⌛️ Please Wait It will take few seconds to grab Updates"); // bot will send a reply to users. 
+      ctx.reply("⌛️ Please Wait It will take few seconds to grab Details"); // bot will send a reply to users. 
      
       const values = await fetchUpdates(options);
       console.log(`done `);
