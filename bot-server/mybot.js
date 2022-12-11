@@ -7,7 +7,7 @@ const bot=new Telegraf(process.env.TEL_KEY);
 
 
 var options = {
-  url:'https://indian-news-live.p.rapidapi.com/news/cricket',
+  url:'http://www.omdbapi.com/?apikey=[process.env.API_KEY]&',
   method: 'GET',
   headers: {
     'x-rapidapi-host': 'indian-news-live.p.rapidapi.com',
@@ -27,13 +27,13 @@ var fetchUpdates =  async(options) => {
     }
   }
   bot.telegram.setMyCommands([
-    { command: '/start', description: 'start a dialogue with CricNews' },
+    { command: '/start', description: 'start a dialogue the Fresh Tomato' },
     { command: '/help', description: 'know different and functionalities available' },
     { command: '/about', description: 'to know more about bot maker' },
-    { command: '/cricket', description: 'get cricket news update' }
+    { command: '/movie', description: 'get info about your movie' }
   ])
 
-bot.command("cricket", async (ctx) => {
+bot.command("movie", async (ctx) => {
     
     try {
       ctx.reply(`${Date()}`);
@@ -68,7 +68,7 @@ Find the complete article at :
 
 
 bot.start(ctx => ctx.reply(`
-Hi, I'm a simple bot to give Daily Cricket News. 
+Hi, I'm a simple bot that gives you information about the movie you give me. 
 (please write /help to know how to use)
 Visit site https://cric-newsupdate.netlify.app/ 
 `))
@@ -78,7 +78,7 @@ bot.command('about', (ctx) => {
 })
 
 bot.help(ctx => ctx.reply(`
-   Write /cricket to get cricket updates. 
+   Write /movie [MOVIE NAME] to get info about that movie 
   Write /about to know about me.
   Send a sticker to get emoji in return.
 `))
@@ -90,3 +90,5 @@ bot.on('sticker', (ctx) => ctx.reply('👍'))
 
 
 bot.launch();
+
+
