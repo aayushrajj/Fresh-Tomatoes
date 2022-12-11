@@ -5,13 +5,16 @@ require('dotenv').config();
 
 const bot=new Telegraf(process.env.TEL_KEY);
 
+movieapi = "process.env.API_KEY";
+
 
 var options = {
-  url:'http://www.omdbapi.com/?apikey=[ec64f18c]&',
+  url:'http://www.omdbapi.com',
   method: 'GET',
-  headers: {
-    'x-rapidapi-host': 'indian-news-live.p.rapidapi.com',
-    'x-rapidapi-key': process.env.API_KEY,
+
+  params: {
+    apikey:movieapi,
+    t: "badla"
   }
 };
 
@@ -25,37 +28,31 @@ var fetchUpdates =  async(options) => {
     } catch (e) {
       throw e;
     }
-  }
-  bot.telegram.setMyCommands([
+}
+
+bot.telegram.setMyCommands([
     { command: '/start', description: 'start a dialogue the Fresh Tomato' },
     { command: '/help', description: 'know different and functionalities available' },
     { command: '/about', description: 'to know more about bot maker' },
     { command: '/movie', description: 'get info about your movie' }
-  ])
+])
 
 bot.command("movie", async (ctx) => {
-    
+  
+  const movie = ctx.message.text;
+
+
     try {
-      ctx.reply(`${Date()}`);
-      ctx.reply("⌛️ Please Wait It will take few seconds to grab Details"); // bot will send a reply to users. 
+      // ctx.reply(`${Date()}`);
+      // ctx.reply("⌛️ Please Wait It will take few seconds to grab Details"); // bot will send a reply to users. 
      
-      const values = await fetchUpdates(options);
-      console.log(`done `);
+      // const values = await fetchUpdates(options);
+      // console.log(`done `);
     
     
     for (let r of values.data){
        
-        ctx.reply(`
-        Details:
- ${r.title}
-
-Find the complete article at :
-
-      ${r.url}
-        ${r.img}
-        `);
-
-        
+        ctx.reply( `Details: ${r.title} // Find the complete article at : ${r.url} ${r.img} `);    
         
     }
      
@@ -85,8 +82,6 @@ bot.help(ctx => ctx.reply(`
 `))
 
 bot.on('sticker', (ctx) => ctx.reply('👍'))
-
-
 
 
 
