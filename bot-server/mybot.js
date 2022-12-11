@@ -68,13 +68,14 @@ Find the complete article at :
 
 
 bot.start(ctx => ctx.reply(`
-Hi, I'm a simple bot that gives you information about the movie you give me. 
+Hi, I'm a simple bot.
+I will return the details about any movie.
 (please write /help to know how to use)
 Visit site https://cric-newsupdate.netlify.app/ 
 `))
 
 bot.command('about', (ctx) => {
-    ctx.reply(`Hey, my name @aashirwadd and i created using Node js to get Cricket News. You can also visit the site https://cric-newsupdate.netlify.app/ `)
+    ctx.reply(`Hey, my name @aayushrajj and I created this Bot using Node js to get any Moive info. You can also visit the site https://cric-newsupdate.netlify.app/ `)
 })
 
 bot.help(ctx => ctx.reply(`
