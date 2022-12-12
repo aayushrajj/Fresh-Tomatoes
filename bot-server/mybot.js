@@ -1,34 +1,53 @@
 
 const { Telegraf } = require('telegraf')
 const axios = require("axios");
+// const request = require('request');
 require('dotenv').config();
 
 const bot=new Telegraf(process.env.TEL_KEY);
 
-movieapi = "process.env.API_KEY";
+apiKey = process.env.API_KEY;
 
 
-var options = {
-  url:'http://www.omdbapi.com',
-  method: 'GET',
+// var options = {
+//   url:'http://www.omdbapi.com',
+//   method: 'GET',
 
-  params: {
-    apikey:movieapi,
-    t: "badla"
-  }
-};
+//   params: {
+//     apikey:movieapi,
+//     t: "badla"
+//   }
+// };
 
-var fetchUpdates =  async(options) => {
-    try {
-       var data = await axios (options)
-       .catch((e) => console.log(e));
+// const options = {
+//   url: 'http://www.omdbapi.com',
+//   qs: {
+//     t: movieTitle,
+//     apikey: movieapi,
+//   },
+// };
+
+// var fetchUpdates =  async(options) => {
+//     try {
+//        var data = await axios (options)
+//        .catch((e) => console.log(e));
      
-        return (data);
+//         return (data);
       
-    } catch (e) {
-      throw e;
-    }
-}
+//     } catch (e) {
+//       throw e;
+//     }
+// }
+
+// request(options, (error, response, body) => {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     const data = JSON.parse(body);
+//     console.log(data);
+//     return (data);
+//   }
+// });
 
 bot.telegram.setMyCommands([
     { command: '/start', description: 'start a dialogue the Fresh Tomato' },
@@ -39,22 +58,29 @@ bot.telegram.setMyCommands([
 
 bot.command("movie", async (ctx) => {
   
-  const movie = ctx.message.text;
+  const query = ctx.message.text;
 
 
     try {
-      // ctx.reply(`${Date()}`);
-      // ctx.reply("⌛️ Please Wait It will take few seconds to grab Details"); // bot will send a reply to users. 
+      ctx.reply(`${Date()}`);
+      ctx.reply("⌛️ Please Wait It will take few seconds to grab Details"); // bot will send a reply to users. 
      
+      axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&t=${query}`).then((response) => {
+        console.log(response.data);
+        ctx.reply( `Details: ${response}`);    
+      })
+      // .catch((error) => {
+      //   console.error(error);
+      // });
+
       // const values = await fetchUpdates(options);
       // console.log(`done `);
+
+
+
     
     
-    for (let r of values.data){
-       
-        ctx.reply( `Details: ${r.title} // Find the complete article at : ${r.url} ${r.img} `);    
-        
-    }
+
      
       
     } catch (e) {
